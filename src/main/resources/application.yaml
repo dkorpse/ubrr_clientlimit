@@ -1,0 +1,35 @@
+
+
+management:
+  endpoints.web.exposure.include: health,info
+
+logging:  
+  org.springframework: WARN
+spring.main.banner-mode: OFF
+spring.application.name : ClientLimit
+spring:
+  datasource:
+     url: ${DATASOURCE_URL}
+     username: ${DATASOURCE_USERNAME}
+     password: ${DATASOURCE_PASSWORD}
+     driver-class-name: oracle.jdbc.driver.OracleDriver
+  kafka:
+    bootstrap.servers: ${BOOTSTRAP_SERVER}
+    group.id: ${GROUP_ID}
+    group.unique.prefix: ${UNIQUE_PREFIX}
+    consumer:
+      topic.client.assesment: ${TOPIC_CONSUMER_ASSESSMENT}
+      topic.advance.limit.calculation: ${TOPIC_CONSUMER_CALCULATION}
+      topic.final.limit.calculation: ${TOPIC_CONSUMER_FINAL_CALCULATION}
+      topic.check.limit.status: ${TOPIC_CONSUMER_STATUS}
+      auto-offset-reset: ${AUTO_OFFSET}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      topic.client.assesment: ${TOPIC_PRODUCER_ASSESSMENT}
+      topic.advance.limit.calculation: ${TOPIC_PRODUCER_CALCULATION}
+      topic.final.limit.calculation: ${TOPIC_PRODUCER_FINAL_CALCULATION}
+      topic.check.limit.status: ${TOPIC_PRODUCER_STATUS}
+      error.topic: ${TOPIC_PRODUCER_ERROR}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

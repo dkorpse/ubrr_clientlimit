@@ -1,0 +1,37 @@
+
+
+management:
+  endpoints.web.exposure.include: health,info
+
+logging:
+ 
+  org.springframework: WARN
+spring.main.banner-mode: OFF
+spring.application.name : ClientLimit
+spring:
+  datasource:
+     url: jdbc:oracle:thin:@tvkl.dbs.ubrr.ru:1521:tvkl
+     username: CAMUNDA
+     password: CAMUNDA1
+     driver-class-name: oracle.jdbc.driver.OracleDriver
+  kafka:
+    bootstrap.servers: localhost:9092
+    group.id: g1
+    unique.prefix: uq
+    consumer:
+      topic.client.assesment: c-a-topic
+      topic.advance.limit.calculation: c-alc-topic
+      topic.final.limit.calculation: c-flc-topic
+      topic.check.limit.status: c-cls-topic
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap.servers: localhost:9092
+      topic.client.assesment: p-a-topic
+      topic.advance.limit.calculation: p-alc-topic
+      topic.final.limit.calculation: p-flc-topic
+      topic.check.limit.status: p-cls-topic
+      error.topic: error-topic
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
